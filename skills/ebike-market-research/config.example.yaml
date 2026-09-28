@@ -1,0 +1,55 @@
+skill: ebike-market-research
+
+research:
+  region: Europe
+  countries:
+    - Germany
+    - Netherlands
+    - Belgium
+    - Poland
+  lookback_days: 7
+  daily_top_n: 10
+
+products:
+  - electric bicycle
+  - e-bike
+  - pedelec
+  - e-bike frame
+
+customer_types:
+  - brand
+  - assembler
+  - distributor
+  - retailer
+  - OEM/ODM buyer
+
+topics:
+  - market demand
+  - regulation
+  - competitor
+  - customer signal
+  - product launch
+  - motor
+  - battery
+  - frame
+  - supply chain
+  - pricing
+  - inventory
+  - leasing
+  - investment
+  - M&A
+  - bankruptcy
+  - product safety
+
+scoring:
+  critical_min: 80
+  important_min: 60
+  monitor_min: 40
+
+trend_detection:
+  minimum_independent_signals: 3
+
+output:
+  language: auto
+  include_sources: true
+  include_next_actions: true
