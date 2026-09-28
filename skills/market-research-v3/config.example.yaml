@@ -1,0 +1,73 @@
+skill: market-research-v3
+version: 3
+
+product:
+  name: ""
+  description: ""
+  category: ""
+  assets: []
+  product_pages: []
+  target_customers: []
+
+markets:
+  countries: []
+  cities: []
+  languages: []
+
+topic_scout:
+  cadence: weekly
+  lookback_days: 7
+  output_count: 30
+  minimum_output: 20
+  maximum_output: 50
+  source_families:
+    - web_search
+    - google_trends
+    - industry_media
+    - competitor_blog
+    - reddit_forums
+    - youtube
+    - associations
+    - regulation_policy
+    - customer_questions
+    - serp_paa
+
+topic_scorer:
+  weights:
+    search_demand: 20
+    buyer_intent: 25
+    product_relevance: 20
+    commercial_value: 20
+    content_opportunity: 10
+    freshness: 5
+  thresholds:
+    reject_max: 59
+    backlog_min: 60
+    research_min: 75
+    priority_research_min: 85
+
+seo_metrics:
+  provider: none
+  allowed_providers:
+    - ahrefs
+    - semrush
+    - dataforseo
+  never_guess_metrics: true
+  null_when_unavailable: true
+
+researcher:
+  use_live_web_research: true
+  minimum_independent_sources: 3
+  require_primary_source_for_numbers: true
+  include_contradictory_evidence: true
+  numeric_evidence_gate: true
+
+feishu:
+  enabled: false
+  base_token: ""
+  table_id: ""
+  upsert_key: Topic ID
+  preserve_fields:
+    - Owner
+    - Status
+    - Editorial Notes

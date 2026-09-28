@@ -1,0 +1,7 @@
+interface:
+  display_name: "Market Research V3"
+  short_description: "Scout, score, and research evidence-backed market topics"
+  default_prompt: "Use $market-research-v3 to discover 30 topics, score them, and create cited Research Packs for priority topics."
+
+policy:
+  allow_implicit_invocation: true

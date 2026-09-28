@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Market Research V3 Topic Records",
+  "type": "array",
+  "minItems": 20,
+  "maxItems": 50,
+  "items": {
+    "type": "object",
+    "required": [
+      "topic_id", "topic", "keyword", "source_type", "source_url",
+      "reason", "target_customer", "country", "search_intent",
+      "buyer_stage", "evidence_summary"
+    ],
+    "properties": {
+      "topic_id": {"type": "string"},
+      "topic": {"type": "string"},
+      "keyword": {"type": "string"},
+      "source_type": {"type": "string"},
+      "source_url": {"type": "string", "format": "uri"},
+      "supporting_sources": {
+        "type": "array",
+        "items": {"type": "string", "format": "uri"}
+      },
+      "reason": {"type": "string"},
+      "target_customer": {"type": "string"},
+      "country": {"type": "string"},
+      "language": {"type": ["string", "null"]},
+      "search_intent": {"type": "string"},
+      "buyer_stage": {"type": "string"},
+      "evidence_summary": {"type": "string"},
+      "first_seen": {"type": "string", "format": "date-time"},
+      "search_volume": {"type": ["number", "null"]},
+      "keyword_difficulty": {"type": ["number", "null"]},
+      "cpc": {"type": ["number", "null"]},
+      "cpc_currency": {"type": ["string", "null"]},
+      "seo_provider": {"type": ["string", "null"]},
+      "seo_query_date": {"type": ["string", "null"], "format": "date"},
+      "search_demand_basis": {"enum": ["verified", "proxy"]}
+    },
+    "additionalProperties": true
+  }
+}

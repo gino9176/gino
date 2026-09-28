@@ -4,11 +4,11 @@ Reusable AI skills for business research and automation.
 
 ## Skills
 
-### Market Research
+### Market Research V3
 
 Path:
 
-skills/market-research/SKILL.md
+skills/market-research-v3/SKILL.md
 
 Functions:
 
@@ -17,6 +17,10 @@ Functions:
 - Customer analysis
 - Competitor research
 - Sales channel research
+- Topic Scout and deduplication
+- Fixed 100-point Topic Scorer
+- Evidence-backed Research Packs
+- Feishu Topic Database
 - Purchase intent validation
 
 ### Customer Research
