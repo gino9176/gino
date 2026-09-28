@@ -1,7 +1,7 @@
 ---
-name: ebike-market-research
+name: market-research
 description: >
-  Research any physical or digital product and turn current multi-source evidence into a structured market study, trend signals, and 20-50 prioritized topics. Use when the user provides a product name, description, image, video, specification, category, or URL and asks for market research, product opportunity analysis, country or city selection, audience and channel research, industry news monitoring, competitor research, customer questions, SEO/content topics, trend discovery, or export to Feishu Topics. Despite the legacy name, this skill supports products beyond e-bikes.
+  Research any physical or digital product and turn current multi-source evidence into a structured market study, trend signals, and 20-50 prioritized topics. Use when the user provides a product name, description, image, video, specification, category, or URL and asks for market research, product opportunity analysis, country or city selection, audience and channel research, industry news monitoring, competitor research, customer questions, SEO/content topics, trend discovery, or export to Feishu Topics.
 ---
 
 # Product Market Research V2
@@ -11,7 +11,6 @@ Turn a product input into evidence-backed market intelligence and a prioritized 
 ## Load supporting files
 
 - Read `references/source-strategy.md` before building queries or selecting sources.
-- Read `references/sources.md` only when the product is an e-bike, bicycle, frame, or related component; treat it as an industry seed list rather than a closed source universe.
 - Read `references/scoring.md` before ranking markets, signals, or topics.
 - Read `references/feishu-topics.md` when the user wants Feishu output or a reusable Topics database.
 - Use `templates/market-research-report.md` for a full market study.

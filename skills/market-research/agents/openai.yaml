@@ -1,7 +1,7 @@
 interface:
   display_name: "Product Market Research V2"
   short_description: "Research products, markets, trends, and topic opportunities"
-  default_prompt: "Use $ebike-market-research to research this product and produce a prioritized market study plus 30 deduplicated topics."
+  default_prompt: "Use $market-research to research this product and produce a prioritized market study plus 30 deduplicated topics."
 
 policy:
   allow_implicit_invocation: true
