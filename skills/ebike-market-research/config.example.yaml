@@ -1,55 +1,70 @@
 skill: ebike-market-research
+version: 2
+
+product:
+  name: ""
+  category: ""
+  description: ""
+  input_assets: []
+  known_specifications: []
+  substitutes: []
+
+business:
+  model: "B2B"
+  objective: "market-entry"
+  offer: ""
+  target_customers: []
+  price_position: "mid-market"
+  capabilities: []
+  constraints: []
+
+market:
+  regions: []
+  countries: []
+  cities: []
+  languages: []
 
 research:
-  region: Europe
-  countries:
-    - Germany
-    - Netherlands
-    - Belgium
-    - Poland
-  lookback_days: 7
-  daily_top_n: 10
+  mode: "full-research"
+  lookback_days: 90
+  cutoff_date: "auto"
+  topic_count: 30
+  results_per_dimension: 10
+  include_market_sizing: true
+  include_competitors: true
+  include_regulation: true
+  include_validation_plan: true
 
-products:
-  - electric bicycle
-  - e-bike
-  - pedelec
-  - e-bike frame
+source_families:
+  web_search: true
+  trends: true
+  industry_media: true
+  competitor_sites: true
+  reddit_forums: true
+  youtube: true
+  associations: true
+  official_policy: true
+  customer_questions: true
+  serp_paa: true
 
-customer_types:
-  - brand
-  - assembler
-  - distributor
-  - retailer
-  - OEM/ODM buyer
-
-topics:
-  - market demand
-  - regulation
-  - competitor
-  - customer signal
-  - product launch
-  - motor
-  - battery
-  - frame
-  - supply chain
-  - pricing
-  - inventory
-  - leasing
-  - investment
-  - M&A
-  - bankruptcy
-  - product safety
-
-scoring:
-  critical_min: 80
-  important_min: 60
-  monitor_min: 40
+topic_mix:
+  education: 15
+  pain_points: 20
+  comparison: 15
+  commercial_intent: 20
+  regulation_risk: 10
+  trend_news: 10
+  use_maintenance: 10
 
 trend_detection:
   minimum_independent_signals: 3
+  compare_with_history: true
 
 output:
-  language: auto
+  language: "auto"
   include_sources: true
+  include_confidence: true
+  include_queries: true
   include_next_actions: true
+  feishu_enabled: false
+  feishu_destination: ""
