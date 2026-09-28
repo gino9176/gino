@@ -1,94 +1,80 @@
-# Intelligence Scoring Model
+# Scoring Models
 
-Score each item from 0 to 100.
+Use three separate 0-100 scores. Do not combine them into one opaque number.
 
-## 1. Industry relevance — 0-20
+## A. Market Attractiveness Score
 
-- 0: barely related to e-bikes
-- 5: general cycling relevance
-- 10: meaningful e-bike relevance
-- 15: strong industry impact
-- 20: directly affects the e-bike market or value chain
+| Factor | Weight | What to test |
+|---|---:|---|
+| Demand evidence | 20 | sales, imports, searches, inquiries, installed base, channel activity |
+| Growth and momentum | 15 | multi-period growth, rising interest, investment, product launches |
+| Product-market fit | 15 | use cases, climate, infrastructure, compatibility, buyer needs |
+| Market accessibility | 15 | channel access, distributors, language, logistics, customer concentration |
+| Margin potential | 10 | price band, landed cost, service burden, payment terms |
+| Competitive whitespace | 10 | unmet segment or weak incumbent coverage; score inversely to crowding |
+| Regulatory feasibility | 10 | legal path, certifications, tariff, safety, liability |
+| Evidence quality | 5 | authority, recency, corroboration, methodological clarity |
 
-## 2. Market relevance — 0-15
+Bands:
 
-Consider geography, market size and timing.
+- 80-100: high-priority validation market
+- 65-79: attractive with defined conditions
+- 50-64: investigate or test narrowly
+- below 50: low priority or evidence insufficient
 
-- 0: outside scope
-- 5: indirect relevance
-- 10: target-region relevance
-- 15: direct effect on a priority market
+Report regulatory blockers and severe risks separately; a high total must not hide a fatal constraint.
 
-## 3. Customer relevance — 0-15
+## B. Intelligence Signal Score
 
-Consider brands, assemblers, distributors, retailers, fleets and other target buyers.
+| Factor | Weight |
+|---|---:|
+| Product/category relevance | 20 |
+| Target-market relevance | 15 |
+| Buyer/customer relevance | 15 |
+| Commercial opportunity | 15 |
+| Risk or strategic impact | 15 |
+| Freshness and momentum | 10 |
+| Source quality and corroboration | 10 |
 
-- 0: no buyer relevance
-- 5: weak signal
-- 10: clear customer implication
-- 15: strong buying, expansion, sourcing or distress signal
+Bands:
 
-## 4. Product relevance — 0-15
+- 80-100: critical
+- 60-79: important
+- 40-59: monitor
+- below 40: background
 
-Consider:
-- frame type
-- motor interface
-- battery integration
-- geometry
-- drivetrain
-- city / trekking / MTB / cargo use case
-- component standards
+## C. Topic Opportunity Score
 
-Score higher when the development may change product requirements.
+| Factor | Weight | What to test |
+|---|---:|---|
+| Product and audience relevance | 20 | direct fit with the offer and target person |
+| Pain or intent strength | 20 | costly problem, purchase intent, regulatory need, active comparison |
+| Demand or momentum evidence | 15 | repeated questions, trend movement, community activity, news |
+| Commercial usefulness | 15 | can educate, qualify, convert, retain, or support sales outreach |
+| Evidence breadth and quality | 15 | multiple families, primary evidence, recency |
+| Differentiation opportunity | 10 | unique data, expertise, case evidence, underserved angle |
+| Freshness or timing | 5 | current trigger, season, launch, deadline, emerging trend |
 
-## 5. Opportunity potential — 0-20
+Topic bands:
 
-Examples:
-- new sourcing need
-- supplier switch
-- expansion
-- new model platform
-- new channel
-- market recovery
-- regulatory need that creates demand
+- 80-100: produce or act now
+- 65-79: high-priority backlog
+- 50-64: supporting topic or test
+- below 50: park unless strategically necessary
 
-Do not score speculative opportunities highly without evidence.
+## Confidence label
 
-## 6. Risk impact — 0-10
+Assign independently from the score:
 
-Examples:
-- regulatory restriction
-- falling demand
-- inventory surplus
-- bankruptcy
-- price pressure
-- recall
-- supply disruption
-- tariff / trade issue
+- `High`: primary evidence plus corroboration, or multiple strong independent sources.
+- `Medium`: one strong source or several partial sources.
+- `Low`: early signal, narrow sample, weak source, or unresolved ambiguity.
 
-A story can contain both opportunity and risk.
+## Deduplication priority
 
-## 7. Source credibility — 0-5
+When topics overlap:
 
-- 1: unverified social/forum source
-- 2: secondary blog
-- 3: established media
-- 4: specialist industry publication
-- 5: regulator, official statistics, association, company filing or primary source
-
-## Priority Bands
-
-- 80-100 — Critical / must review
-- 60-79 — Important
-- 40-59 — Monitor
-- 0-39 — Background
-
-## Confidence
-
-In addition to the numerical score, label confidence:
-
-- High: primary evidence or multiple independent high-quality sources
-- Medium: one strong source or multiple partial sources
-- Low: early signal, unclear sourcing or incomplete evidence
-
-Do not let a high business relevance score hide low confidence.
+1. Keep the wording that best matches user language and intent.
+2. Merge evidence and sources.
+3. Preserve regional or audience variants only when the answer materially changes.
+4. Choose one pillar topic and attach the remaining angles as supporting topics.
