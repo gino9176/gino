@@ -1,342 +1,246 @@
 ---
 name: ebike-market-research
 description: >
-  Research and monitor the electric bicycle industry. Collect current news,
-  market data, regulations, company activity, product launches, technology,
-  supply-chain developments, pricing, investment and customer signals, then
-  convert them into prioritized business intelligence, opportunities, risks
-  and concrete next actions.
+  Research any physical or digital product and turn current multi-source evidence into a structured market study, trend signals, and 20-50 prioritized topics. Use when the user provides a product name, description, image, video, specification, category, or URL and asks for market research, product opportunity analysis, country or city selection, audience and channel research, industry news monitoring, competitor research, customer questions, SEO/content topics, trend discovery, or export to Feishu Topics. Despite the legacy name, this skill supports products beyond e-bikes.
 ---
 
-# E-bike Market Research
+# Product Market Research V2
 
-## Purpose
+Turn a product input into evidence-backed market intelligence and a prioritized topic backlog. Do not merely summarize search results.
 
-Turn current e-bike industry information into actionable market intelligence.
+## Load supporting files
 
-Do not merely summarize news. For each meaningful development, answer:
+- Read `references/source-strategy.md` before building queries or selecting sources.
+- Read `references/sources.md` only when the product is an e-bike, bicycle, frame, or related component; treat it as an industry seed list rather than a closed source universe.
+- Read `references/scoring.md` before ranking markets, signals, or topics.
+- Read `references/feishu-topics.md` when the user wants Feishu output or a reusable Topics database.
+- Use `templates/market-research-report.md` for a full market study.
+- Use `templates/topic-backlog.md` for the 20-50 topic output.
+- Use `templates/daily-report.md` for daily or weekly monitoring.
+- Use `config.example.yaml` when the user wants a reusable configuration.
 
-1. What happened?
-2. When did it happen?
-3. Which market, company, product or regulation is affected?
-4. Why does it matter?
-5. Is it an Opportunity, Risk or Watch signal?
-6. What evidence supports the conclusion?
-7. What should the user do next?
+## Operating modes
 
-## Inputs
+Choose the smallest mode that satisfies the request:
 
-At minimum, accept:
-- industry, product or research topic
+1. `full-research`: product understanding, market attractiveness, people-product-place analysis, competitors, channels, regulations, opportunities, risks, and topics.
+2. `topic-scout`: discover, deduplicate, cluster, score, and return 20-50 topics.
+3. `trend-monitor`: scan recent news and weak signals, then produce an intelligence brief.
+4. `market-deep-dive`: analyze one country, city, customer segment, channel, or competitor set.
+5. `validation-plan`: convert uncertain conclusions into buyer interviews, landing pages, RFQs, ads, preorders, or other demand tests.
 
-Optional:
-- target countries or regions
-- target customer types
-- monitored brands or competitors
-- monitored suppliers
-- products or technologies
+If the user does not specify a mode, use `full-research` and include a topic backlog.
+
+## Input contract
+
+Require only one product identifier:
+
+- product name, description, image, video, specification, category, or product URL
+
+Accept these optional inputs:
+
+- target countries, regions, or cities
+- B2B, B2C, or both
+- target users, buyers, or customer types
+- company offer, capabilities, price position, MOQ, lead time, and certifications
 - sales channels
-- date range
-- company strategy or business objective
-- desired output: daily brief, weekly report, deep dive or alert
-
-If inputs are incomplete, make reasonable research defaults and state them briefly.
-
-## Research Scope
-
-Scan these categories:
-
-1. Industry trends
-2. Market demand and sales
-3. Regulation, standards and trade policy
-4. Competitors and brands
-5. Customer and retailer signals
-6. Product launches and specifications
-7. Motor, battery, drivetrain and frame technology
-8. Supply chain, production and sourcing
-9. Pricing, inventory and discounting
-10. Distribution, retail, leasing and e-commerce
-11. Investment, M&A, bankruptcy and restructuring
-12. Consumer behavior and product safety
-13. Exhibitions and industry events
-
-## Source Priority
-
-Use the source list in `references/sources.md`.
-
-Prefer sources in this order:
-
-### Tier A — Primary / official
-- EU and national government sources
-- regulations and standards bodies
-- official statistics
-- company press releases and financial reports
-- official industry associations
-- official product-safety databases
-
-### Tier B — Specialist industry media
-- established bicycle and e-bike trade publications
-- specialist market-data publications
-
-### Tier C — Secondary signals
-- mainstream business media
-- retailer news
-- LinkedIn/company posts
-- forums and Reddit
-
-Use Tier C mainly for signal discovery. Verify important claims with Tier A or Tier B whenever possible.
-
-## Freshness Rules
-
-- For daily monitoring, prioritize developments from the last 24-72 hours.
-- For weekly reports, prioritize the last 7 days.
-- Distinguish publication date from event date.
-- Do not call an old event "new" merely because a recent article mentions it.
-- If a story is an update to an earlier event, explain what is actually new.
-- Avoid repeating previously reported items unless there is a material change.
-
-## Research Workflow
-
-### Step 1 — Discover
-
-Search across:
-- industry media
-- associations
-- regulators
-- market data
-- company newsrooms
-- suppliers
-- exhibitions
-
-Use multiple query variants, including:
-- e-bike / ebike / electric bicycle / pedelec
-- country names
-- company names
-- regulation names
-- product categories
-- motor, battery, drivetrain and frame keywords
-
-### Step 2 — Extract
-
-For each item, capture:
-- headline
-- source
-- source type
-- URL
-- publication date
-- event date
-- country/region
-- companies
-- products
-- technologies
-- regulation/standard
-- key factual claims
-- supporting evidence
-
-### Step 3 — Deduplicate
-
-Merge stories that describe the same underlying event.
-
-Keep the strongest original/primary source and optionally one high-quality independent source.
-
-### Step 4 — Classify
-
-Assign one or more tags:
-
-- Market
-- Demand
-- Regulation
-- Trade
-- Competitor
-- Customer
-- Product
-- Technology
-- Motor
-- Battery
-- Frame
-- SupplyChain
-- Pricing
-- Inventory
-- Retail
-- Leasing
-- Investment
-- M&A
-- Bankruptcy
-- ProductSafety
-- Event
+- known competitors or substitutes
+- business objective
+- date range and reporting cadence
+- output language
+- desired number of topics from 20 to 50
+- Feishu destination or requested export format
 
-### Step 5 — Determine Signal
-
-Classify each important item as:
+Do not block when optional fields are missing. Infer provisional defaults, label each one `Assumption`, and identify which assumptions materially affect the conclusion.
 
-- Opportunity
-- Risk
-- Watch
+## Workflow
 
-Multiple labels are allowed when justified.
+### 1. Build the product brief
 
-### Step 6 — Analyze Business Meaning
+Determine:
 
-For every high-value item, explain:
+- what the product is and is not
+- category, components, materials, and substitutes
+- primary and secondary use scenarios
+- user, buyer, decision maker, influencer, and payer
+- B2B/B2C business model and likely buying unit
+- functional, emotional, financial, and compliance jobs
+- likely price band and positioning
+- constraints that change market fit
 
-- What happened
-- Why it matters
-- Market implication
-- Customer implication
-- Competitive implication
-- Supply-chain implication
-- Product implication
-- Confidence level
-- Recommended next action
+If an image or video is provided, distinguish visible facts from inference. Do not invent hidden specifications.
 
-Do not invent customer demand or causality. Separate observed facts from inference.
+### 2. Apply People-Product-Place analysis
 
-### Step 7 — Score
+Analyze:
 
-Use the scoring model in `references/scoring.md`.
+- `People`: users, buyers, decision makers, pain points, objections, purchase triggers, and unmet needs.
+- `Product`: core value, alternatives, price band, differentiation, compatibility, lifecycle, and compliance.
+- `Place`: countries, cities, climates, use settings, channels, platforms, distributors, and sales moments.
 
-Return a score from 0-100.
+Return up to 10 evidence-backed results per requested dimension when enough evidence exists. Return fewer instead of padding weak results.
 
-Priority bands:
+### 3. Generate a dynamic source map
 
-- 80-100: Critical / must review
-- 60-79: Important
-- 40-59: Monitor
-- 0-39: Background
+Start with these source families, then discover product-specific and country-specific sources:
 
-### Step 8 — Detect Trends
+1. Google Search or another capable web search engine
+2. Google Trends or an equivalent trend-data source
+3. specialist industry media
+4. competitor blogs, newsrooms, catalogs, filings, and product pages
+5. Reddit and relevant forums
+6. YouTube videos, channels, comments, and reviews
+7. industry associations and standards bodies
+8. regulation, policy, customs, statistics, and product-safety websites
+9. customer questions in reviews, support pages, communities, and sales conversations
+10. SERP People Also Ask, related searches, and autocomplete suggestions
 
-Compare current findings with historical findings when available.
+Treat discovery platforms as signal sources, not automatically as proof. Prefer primary sources for regulations, statistics, specifications, and company claims.
 
-Look for:
-- increasing topic frequency
-- repeated company activity
-- repeated product patterns
-- price changes
-- inventory normalization
-- geographic shifts
-- regulatory momentum
-- recurring customer pain points
-- new technologies
-- supplier substitutions
+### 4. Build the query matrix
 
-Do not declare a trend from one article.
+Combine the normalized product vocabulary with:
 
-Create a Trend record when at least 3 reasonably independent signals point to the same development.
+- use case and problem
+- buyer or user type
+- country, city, and local-language synonym
+- price, cost, review, comparison, alternative, and supplier intent
+- regulation, standard, certification, tariff, recall, and safety intent
+- trend, news, launch, growth, decline, shortage, inventory, and investment intent
+- forum, Reddit, YouTube, FAQ, PAA, and complaint intent
 
-Trend record:
-- trend name
-- first seen
-- latest evidence
-- evidence count
-- affected markets
-- affected companies
-- signal strength
-- business implication
-- next action
+Use local-language queries for priority markets. Record the exact queries that produced high-value evidence.
 
-### Step 9 — Detect Weak Signals
+### 5. Run Trend Scout
 
-Track:
-- rapidly increasing keywords
-- new product terms
-- new suppliers
-- suddenly active brands
-- new country clusters
-- repeated regulatory language
-- repeated complaints or safety issues
+Collect a broad candidate set before ranking:
 
-Label them as Emerging Signal until evidence is strong enough to call a trend.
+- current news and policy changes
+- repeated questions and complaints
+- rising product terms and use cases
+- competitor launches, pricing, partnerships, hiring, expansion, contraction, and sourcing signals
+- channel changes and retailer activity
+- new regulations, recalls, standards, and compliance deadlines
+- product-review language and recurring objections
+- geographic clusters and seasonal patterns
 
-## Daily Output
+Capture for every item: title, source, URL, source type, publication date, event date, geography, entity, observed fact, inference, and query.
 
-Return no more than 10 high-value items by default.
+### 6. Normalize and deduplicate
 
-Structure:
+Normalize casing, punctuation, dates, company aliases, product synonyms, tracking parameters, and syndicated headlines.
 
-# E-bike Industry Intelligence — YYYY-MM-DD
+Deduplicate at three levels:
 
-## Top 3 Developments
+1. exact URL or canonical URL
+2. same event reported by multiple sources
+3. different wording with the same search intent or customer question
 
-For each:
-- headline
-- score
-- signal: Opportunity / Risk / Watch
-- what happened
-- why it matters
-- business implication
-- next action
-- sources
+Create one canonical cluster. Retain the strongest primary source, one useful independent source, source count, and distinct evidence. Do not discard corroboration.
 
-## Opportunity Radar
+### 7. Separate facts, signals, and hypotheses
 
-List concrete opportunities discovered today.
+Label statements:
 
-## Risk Radar
+- `Fact`: directly supported by a cited source.
+- `Signal`: a pattern or indicator supported by one or more observations.
+- `Inference`: a reasoned interpretation.
+- `Hypothesis`: an unverified proposition that requires testing.
 
-List concrete risks that may affect demand, compliance, pricing, production or customers.
+Never convert search popularity, social discussion, or views directly into sales volume.
 
-## Customer & Competitor Signals
+### 8. Score and rank
 
-Highlight company-level buying, expansion, restructuring, product, hiring or sourcing signals.
+Apply the correct model in `references/scoring.md`:
 
-## Regulation & Safety
+- market attractiveness score
+- intelligence signal score
+- topic opportunity score
 
-Highlight regulatory, standards, trade, battery, product-safety and recall developments.
+Keep confidence separate from importance. A commercially important but weakly evidenced item must show low confidence.
 
-## Emerging Trends
+### 9. Select 20-50 topics
 
-Only include trends supported by multiple signals.
+Return 30 topics by default. Balance the final set across:
 
-## Watchlist
+- market education and category understanding
+- pain points and jobs-to-be-done
+- comparisons and alternatives
+- purchase, supplier, and commercial intent
+- regulations and risk
+- trend and news response
+- product use, installation, maintenance, and troubleshooting
+- case studies, applications, and proof
 
-Items worth monitoring but not yet actionable.
+Do not return 30 paraphrases of the same keyword. Group topics into clusters, identify one pillar topic, and map supporting topics to it.
 
-## Weekly Output
+For each topic include:
 
-A weekly report should synthesize, not merely concatenate daily reports.
+- canonical topic
+- cluster and angle
+- target person and market
+- search or business intent
+- funnel stage
+- evidence and source URLs
+- why now
+- suggested format and channel
+- topic score and confidence
+- recommended next action
 
-Include:
-- 5 most important developments
-- trend changes
-- opportunity map
-- risk map
-- competitor activity
-- customer signals
-- regulation changes
-- market data changes
-- recommended actions for next week
+### 10. Produce the market study
 
-## Action Conversion
+Synthesize evidence into:
 
-When a signal may create a commercial opportunity, convert it into a possible action such as:
+- product and use-case definition
+- People-Product-Place map
+- demand signals and market stage
+- top countries and cities
+- customer and buyer segments
+- price bands and buying criteria
+- online and offline channels
+- competitors and substitutes
+- regulatory and compliance constraints
+- supply-chain considerations
+- customer questions and pain points
+- trends and weak signals
+- opportunities, risks, and evidence gaps
+- 30/60/90-day actions and validation experiments
 
-- add company to prospect list
-- research purchasing/product/sourcing contacts
-- monitor a product launch
-- compare product specifications
-- review frame or component compatibility
-- prepare an outreach angle
-- create market-specific content
-- adjust pricing assumptions
-- investigate supplier alternatives
-- review compliance documents
-- monitor a regulation
-- schedule follow-up research
+Use ranges and explain methodology when reliable market-size data is unavailable. Never fabricate market size, sales, search volume, growth, regulation, or company facts.
 
-Do not automatically claim that a company is a qualified sales lead. Mark unverified leads as "Potential Lead" until evidence of fit exists.
+### 11. Export to Feishu Topics
 
-## Evidence Standard
+If Feishu access is available, inspect the destination schema before writing. Upsert by `Topic ID` or canonical topic key; do not create duplicates. Ask for the destination only when a write is requested and none is known.
 
-- Cite sources for factual claims.
-- Prefer primary sources for regulations, statistics and company announcements.
-- Cross-check major market claims.
-- Note paywalls or incomplete data.
-- State uncertainty explicitly.
-- Never fabricate market size, sales volume, company revenue or regulations.
+If Feishu access is unavailable, return a Markdown table or CSV-ready structure using `references/feishu-topics.md`. Do not claim that data was written.
 
-## Output Language
+## Evidence rules
 
-Use the user's language unless requested otherwise.
+- Browse for all current market, trend, news, price, regulation, company, and recommendation claims.
+- Use more than one source family for major conclusions.
+- Distinguish event date from publication date.
+- State the research window and cutoff date.
+- Cite claims near the relevant text.
+- Mark paywalls, unavailable metrics, and evidence gaps.
+- Use Reddit, forums, comments, PAA, autocomplete, and YouTube as demand-language evidence unless corroborated.
+- Prefer official sources for regulations, statistics, recalls, specifications, and corporate announcements.
+- Preserve disagreement between sources instead of forcing false certainty.
 
-Keep company names, regulation names and technical terms in their official language where helpful.
+## Quality gate
+
+Before finalizing, verify:
+
+- the product definition matches the input
+- assumptions are visible
+- each major claim has evidence
+- dates are current and unambiguous
+- duplicates and syndicated stories are merged
+- facts and inference are separated
+- topic clusters are genuinely distinct
+- the 20-50 topics cover multiple intents and funnel stages
+- recommendations connect to the user's objective
+- missing data becomes a validation task, not an invented fact
+
+## Output behavior
+
+Use the user's language unless asked otherwise. Lead with the most decision-relevant conclusions. Keep raw source lists after the synthesis, not before it.
