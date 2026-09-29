@@ -1,0 +1,181 @@
+{
+  "run": {
+    "run_id": "weekly-2026-09-29-example",
+    "run_mode": "weekly",
+    "started_at": "2026-09-29T01:00:00Z",
+    "completed_at": "2026-09-29T01:15:00Z",
+    "configuration": {
+      "industry": "Bicycle manufacturing",
+      "product": "Aluminum e-bike frames"
+    },
+    "assumptions": [],
+    "coverage_gaps": ["No authenticated SEO metrics provider"],
+    "partial": false
+  },
+  "summary": {
+    "raw_signals": 0,
+    "valid_signals": 0,
+    "events": 0,
+    "generated_topics": 1,
+    "qualified_topics": 1,
+    "priority_topics": 0
+  },
+  "signals": [],
+  "events": [],
+  "knowledge_map": [
+    {
+      "knowledge_id": "km-buying-supplier-selection",
+      "parent_id": null,
+      "path": ["Buying", "Supplier Selection"],
+      "knowledge_name": "Supplier Selection",
+      "description": "How buyers evaluate and select an e-bike frame supplier.",
+      "importance": 95,
+      "buyer_relevance": 95,
+      "target_roles": ["Purchasing Manager", "Product Manager"],
+      "existing_content_count": 0,
+      "approved_topic_count": 0,
+      "competitor_coverage": 70,
+      "search_demand": null,
+      "content_gap_score": 90,
+      "last_scanned": "2026-09-29T01:10:00Z",
+      "status": "CONFIRMED"
+    }
+  ],
+  "topics": [
+    {
+      "topic_id": "topic-evaluate-ebike-frame-supplier",
+      "topic_concept": "How e-bike brands should evaluate an aluminum frame supplier before RFQ",
+      "suggested_title": "How E-Bike Brands Should Evaluate an Aluminum Frame Supplier Before RFQ",
+      "topic_type": "EVERGREEN_OPPORTUNITY",
+      "content_role": "COMMERCIAL",
+      "angle": "BUYING",
+      "industry_cluster": "Buying",
+      "knowledge_node": "Buying > Supplier Selection",
+      "target_customer": "E-bike brands",
+      "primary_role": "Purchasing Manager",
+      "secondary_role": "Product Manager",
+      "buyer_stage": "SELECT",
+      "search_intent": "SELECT_SUPPLIER",
+      "target_market": ["Netherlands", "Germany"],
+      "primary_keyword": "e-bike frame manufacturer",
+      "secondary_keywords": ["e-bike frame supplier", "aluminum bicycle frame factory"],
+      "seo_metrics": {
+        "search_volume": null,
+        "keyword_difficulty": null,
+        "cpc": null,
+        "provider": null,
+        "market": null,
+        "measured_at": null
+      },
+      "why_now": null,
+      "why_write": "The topic addresses supplier-selection and RFQ decisions while filling a high-value content gap.",
+      "event_id": null,
+      "knowledge_gap_id": "km-buying-supplier-selection",
+      "signal_ids": [],
+      "fingerprint": {
+        "core_entity": "e-bike frame supplier",
+        "primary_problem": "supplier evaluation",
+        "audience": "purchasing manager",
+        "buyer_stage": "SELECT",
+        "intent": "SELECT_SUPPLIER",
+        "angle": "BUYING",
+        "knowledge_node": "Buying > Supplier Selection",
+        "keyword_cluster": ["e-bike frame manufacturer", "e-bike frame supplier"]
+      },
+      "scores": {
+        "trend": {
+          "total": 20,
+          "components": {
+            "recency": 3,
+            "velocity": 0,
+            "source_count": 2,
+            "source_authority": 7,
+            "cross_platform": 2,
+            "search_growth": null,
+            "market_relevance": 6
+          }
+        },
+        "blog_value": {
+          "total": 88,
+          "components": {
+            "buyer_relevance": {
+              "score": 23,
+              "max": 25,
+              "evidence": ["Knowledge Map gap"],
+              "rationale": "Directly supports supplier evaluation."
+            },
+            "commercial_relevance": {
+              "score": 18,
+              "max": 20,
+              "evidence": ["SELECT_SUPPLIER intent"],
+              "rationale": "Closely precedes an RFQ."
+            },
+            "eeat_value": {
+              "score": 14,
+              "max": 15,
+              "evidence": ["Supplier audit criteria"],
+              "rationale": "Demonstrates manufacturing and quality expertise."
+            },
+            "search_opportunity": {
+              "score": 10,
+              "max": 15,
+              "evidence": ["Clear long-tail commercial intent"],
+              "rationale": "Intent is clear although exact SEO metrics are unavailable."
+            },
+            "product_relevance": {
+              "score": 10,
+              "max": 10,
+              "evidence": ["Product is aluminum e-bike frames"],
+              "rationale": "The topic is directly about the configured product."
+            },
+            "content_gap": {
+              "score": 8,
+              "max": 10,
+              "evidence": ["No existing site article", "Competitor coverage observed"],
+              "rationale": "Own-site gap is material."
+            },
+            "evergreen_potential": {
+              "score": 5,
+              "max": 5,
+              "evidence": ["Recurring supplier-selection need"],
+              "rationale": "The decision remains relevant across buying cycles."
+            }
+          }
+        },
+        "base_priority": 67.6,
+        "boosts": [
+          {
+            "rule": "major_competitor_gap",
+            "value": 5,
+            "reason": "Competitors cover supplier selection while the configured site does not.",
+            "evidence": ["Competitor coverage observed", "No existing site article"]
+          }
+        ],
+        "penalties": [],
+        "final_priority": 73,
+        "band": "P2_RECOMMENDED",
+        "special_queue": "EVERGREEN_PRIORITY"
+      },
+      "duplicate_status": "NEW",
+      "overlap_score": 20,
+      "related_topic_ids": [],
+      "pillar_topic_id": null,
+      "lineage": {
+        "source": "Industry Knowledge Map",
+        "knowledge_gap": "km-buying-supplier-selection",
+        "angle": "BUYING",
+        "audience": "Purchasing Manager",
+        "intent": "SELECT_SUPPLIER"
+      },
+      "publish_window": null,
+      "status": "SCORED"
+    }
+  ],
+  "rankings": {
+    "trending_top_5": [],
+    "commercial_top_5": ["topic-evaluate-ebike-frame-supplier"],
+    "evergreen_top_5": ["topic-evaluate-ebike-frame-supplier"],
+    "overall_top_10": ["topic-evaluate-ebike-frame-supplier"]
+  },
+  "errors": []
+}
