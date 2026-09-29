@@ -8,7 +8,7 @@ Reusable AI skills for business research and automation.
 
 Path:
 
-skills/market-research-v3/SKILL.md
+market-research-v3/SKILL.md
 
 Functions:
 
