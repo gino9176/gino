@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/market-topic-v1/output.schema.json",
+  "title": "Market Topic V1 Output",
+  "type": "object",
+  "required": ["run", "summary", "signals", "events", "knowledge_map", "topics", "rankings", "errors"],
+  "properties": {
+    "run": {
+      "type": "object",
+      "required": ["run_id", "run_mode", "started_at", "completed_at", "configuration", "assumptions", "coverage_gaps", "partial"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "run_mode": {"enum": ["daily", "weekly", "monthly"]},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "configuration": {"type": "object"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "coverage_gaps": {"type": "array", "items": {"type": "string"}},
+        "partial": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["raw_signals", "valid_signals", "events", "generated_topics", "qualified_topics", "priority_topics"],
+      "properties": {
+        "raw_signals": {"type": "integer", "minimum": 0},
+        "valid_signals": {"type": "integer", "minimum": 0},
+        "events": {"type": "integer", "minimum": 0},
+        "generated_topics": {"type": "integer", "minimum": 0},
+        "qualified_topics": {"type": "integer", "minimum": 0},
+        "priority_topics": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "signals": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/signal"}
+    },
+    "events": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/event"}
+    },
+    "knowledge_map": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/knowledge"}
+    },
+    "topics": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/topic"}
+    },
+    "rankings": {
+      "type": "object",
+      "required": ["trending_top_5", "commercial_top_5", "evergreen_top_5", "overall_top_10"],
+      "properties": {
+        "trending_top_5": {"$ref": "#/$defs/topicIdList5"},
+        "commercial_top_5": {"$ref": "#/$defs/topicIdList5"},
+        "evergreen_top_5": {"$ref": "#/$defs/topicIdList5"},
+        "overall_top_10": {
+          "type": "array",
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stage", "message", "retryable"],
+        "properties": {
+          "stage": {"type": "string"},
+          "source": {"type": ["string", "null"]},
+          "message": {"type": "string"},
+          "impact": {"type": ["string", "null"]},
+          "retryable": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "topicIdList5": {
+      "type": "array",
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "sourceRef": {
+      "type": "object",
+      "required": ["source_name", "source_url", "source_type", "source_tier"],
+      "properties": {
+        "source_name": {"type": "string"},
+        "source_url": {"type": "string", "format": "uri"},
+        "source_type": {
+          "enum": ["OFFICIAL_PRIMARY", "INDUSTRY_MEDIA", "SEARCH_DEMAND", "COMMUNITY_VOICE", "VIDEO_CREATOR", "COMPETITOR_INTELLIGENCE", "EVERGREEN_KNOWLEDGE"]
+        },
+        "source_tier": {"enum": ["A", "B", "C", "D"]},
+        "published_at": {"type": ["string", "null"]},
+        "event_date": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "signal": {
+      "type": "object",
+      "required": ["signal_id", "title", "summary", "source", "first_seen_at", "country", "language", "entities", "keywords", "evidence_class", "event_id", "status"],
+      "properties": {
+        "signal_id": {"type": "string"},
+        "title": {"type": "string"},
+        "summary": {"type": "string"},
+        "source": {"$ref": "#/$defs/sourceRef"},
+        "first_seen_at": {"type": "string"},
+        "country": {"type": ["string", "null"]},
+        "language": {"type": ["string", "null"]},
+        "entities": {"type": "array", "items": {"type": "string"}},
+        "keywords": {"type": "array", "items": {"type": "string"}},
+        "evidence_class": {"enum": ["FACT", "SIGNAL", "INFERENCE", "HYPOTHESIS"]},
+        "authority_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "raw_relevance": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "event_id": {"type": ["string", "null"]},
+        "status": {"enum": ["NEW", "VALID", "DUPLICATE", "NOISE", "CLUSTERED"]}
+      },
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "required": ["event_id", "event_name", "event_summary", "event_type", "first_seen", "latest_meaningful_update", "last_seen", "signal_count", "source_count", "source_type_count", "countries", "entities", "primary_source", "evidence_sources", "event_status", "cluster_confidence", "trend_score"],
+      "properties": {
+        "event_id": {"type": "string"},
+        "event_name": {"type": "string"},
+        "event_summary": {"type": "string"},
+        "event_type": {
+          "enum": ["REGULATION_POLICY", "STANDARD", "MARKET_SALES", "PRICE_COST", "PRODUCT_LAUNCH", "TECHNOLOGY", "COMPANY_MA", "FACTORY_INVESTMENT", "SUPPLY_CHAIN", "CUSTOMER_BEHAVIOR", "SAFETY_RECALL", "COMPETITION", "TRADE_TARIFF", "ENVIRONMENT", "OTHER"]
+        },
+        "first_seen": {"type": "string"},
+        "latest_meaningful_update": {"type": "string"},
+        "last_seen": {"type": "string"},
+        "signal_count": {"type": "integer", "minimum": 1},
+        "source_count": {"type": "integer", "minimum": 1},
+        "source_type_count": {"type": "integer", "minimum": 1},
+        "countries": {"type": "array", "items": {"type": "string"}},
+        "entities": {"type": "array", "items": {"type": "string"}},
+        "primary_source": {"$ref": "#/$defs/sourceRef"},
+        "evidence_sources": {"type": "array", "items": {"$ref": "#/$defs/sourceRef"}},
+        "event_status": {"enum": ["BREAKING", "TRENDING", "EMERGING", "STABLE", "DECLINING", "ARCHIVED"]},
+        "cluster_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "trend_score": {"$ref": "#/$defs/trendScore"}
+      },
+      "additionalProperties": false
+    },
+    "knowledge": {
+      "type": "object",
+      "required": ["knowledge_id", "parent_id", "path", "knowledge_name", "description", "importance", "buyer_relevance", "target_roles", "content_gap_score", "last_scanned", "status"],
+      "properties": {
+        "knowledge_id": {"type": "string"},
+        "parent_id": {"type": ["string", "null"]},
+        "path": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "knowledge_name": {"type": "string"},
+        "description": {"type": "string"},
+        "importance": {"type": "number", "minimum": 0, "maximum": 100},
+        "buyer_relevance": {"type": "number", "minimum": 0, "maximum": 100},
+        "target_roles": {"type": "array", "items": {"type": "string"}},
+        "existing_content_count": {"type": "integer", "minimum": 0},
+        "approved_topic_count": {"type": "integer", "minimum": 0},
+        "competitor_coverage": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "search_demand": {"type": ["number", "null"], "minimum": 0},
+        "content_gap_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "last_scanned": {"type": "string"},
+        "status": {"enum": ["PROPOSED", "CONFIRMED", "ACTIVE", "RETIRED"]}
+      },
+      "additionalProperties": false
+    },
+    "trendScore": {
+      "type": "object",
+      "required": ["total", "components"],
+      "properties": {
+        "total": {"type": "number", "minimum": 0, "maximum": 100},
+        "components": {
+          "type": "object",
+          "required": ["recency", "velocity", "source_count", "source_authority", "cross_platform", "search_growth", "market_relevance"],
+          "properties": {
+            "recency": {"type": "number", "minimum": 0, "maximum": 15},
+            "velocity": {"type": "number", "minimum": 0, "maximum": 20},
+            "source_count": {"type": "number", "minimum": 0, "maximum": 10},
+            "source_authority": {"type": "number", "minimum": 0, "maximum": 15},
+            "cross_platform": {"type": "number", "minimum": 0, "maximum": 15},
+            "search_growth": {"type": ["number", "null"], "minimum": 0, "maximum": 15},
+            "market_relevance": {"type": "number", "minimum": 0, "maximum": 10}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "valueComponent": {
+      "type": "object",
+      "required": ["score", "max", "evidence", "rationale"],
+      "properties": {
+        "score": {"type": "number", "minimum": 0},
+        "max": {"type": "number", "minimum": 1},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "rationale": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "blogValueScore": {
+      "type": "object",
+      "required": ["total", "components"],
+      "properties": {
+        "total": {"type": "number", "minimum": 0, "maximum": 100},
+        "components": {
+          "type": "object",
+          "required": ["buyer_relevance", "commercial_relevance", "eeat_value", "search_opportunity", "product_relevance", "content_gap", "evergreen_potential"],
+          "properties": {
+            "buyer_relevance": {"$ref": "#/$defs/valueComponent"},
+            "commercial_relevance": {"$ref": "#/$defs/valueComponent"},
+            "eeat_value": {"$ref": "#/$defs/valueComponent"},
+            "search_opportunity": {"$ref": "#/$defs/valueComponent"},
+            "product_relevance": {"$ref": "#/$defs/valueComponent"},
+            "content_gap": {"$ref": "#/$defs/valueComponent"},
+            "evergreen_potential": {"$ref": "#/$defs/valueComponent"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "adjustment": {
+      "type": "object",
+      "required": ["rule", "value", "reason", "evidence"],
+      "properties": {
+        "rule": {"type": "string"},
+        "value": {"type": "number"},
+        "reason": {"type": "string"},
+        "evidence": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "topic": {
+      "type": "object",
+      "required": ["topic_id", "topic_concept", "suggested_title", "topic_type", "content_role", "angle", "industry_cluster", "knowledge_node", "target_customer", "primary_role", "secondary_role", "buyer_stage", "search_intent", "target_market", "primary_keyword", "secondary_keywords", "seo_metrics", "why_now", "why_write", "event_id", "knowledge_gap_id", "signal_ids", "fingerprint", "scores", "duplicate_status", "overlap_score", "related_topic_ids", "pillar_topic_id", "lineage", "publish_window", "status"],
+      "properties": {
+        "topic_id": {"type": "string"},
+        "topic_concept": {"type": "string", "minLength": 1},
+        "suggested_title": {"type": "string", "minLength": 1},
+        "topic_type": {"enum": ["NEWS", "NEWS_ANALYSIS", "EVERGREEN_OPPORTUNITY", "BUYER_QUESTION", "COMMERCIAL_OPPORTUNITY"]},
+        "content_role": {"enum": ["PILLAR", "SUPPORTING", "TREND", "COMMERCIAL", "TECHNICAL", "COMPLIANCE", "FAQ"]},
+        "angle": {"enum": ["EXPLAIN", "IMPACT", "ACTION", "BUYING", "COMPARISON", "COST", "RISK", "COMPLIANCE", "TECHNICAL", "QUALITY", "APPLICATION", "TROUBLESHOOTING", "TREND", "CHECKLIST", "FAQ"]},
+        "industry_cluster": {"type": "string"},
+        "knowledge_node": {"type": ["string", "null"]},
+        "target_customer": {"type": "string"},
+        "primary_role": {"type": "string"},
+        "secondary_role": {"type": ["string", "null"]},
+        "buyer_stage": {"enum": ["LEARN", "UNDERSTAND", "EVALUATE", "SELECT", "SPECIFY", "RFQ", "ORDER", "PRODUCTION", "AFTERSALES"]},
+        "search_intent": {"enum": ["LEARN", "COMPARE", "SOLVE", "VERIFY", "PLAN", "SELECT_SUPPLIER", "SPECIFY", "PRICE", "COMPLIANCE", "RFQ"]},
+        "target_market": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "primary_keyword": {"type": ["string", "null"]},
+        "secondary_keywords": {"type": "array", "items": {"type": "string"}},
+        "seo_metrics": {
+          "type": "object",
+          "required": ["search_volume", "keyword_difficulty", "cpc", "provider", "market", "measured_at"],
+          "properties": {
+            "search_volume": {"type": ["number", "null"], "minimum": 0},
+            "keyword_difficulty": {"type": ["number", "null"], "minimum": 0},
+            "cpc": {"type": ["number", "null"], "minimum": 0},
+            "provider": {"type": ["string", "null"]},
+            "market": {"type": ["string", "null"]},
+            "measured_at": {"type": ["string", "null"]}
+          },
+          "additionalProperties": false
+        },
+        "why_now": {"type": ["string", "null"]},
+        "why_write": {"type": "string", "minLength": 1},
+        "event_id": {"type": ["string", "null"]},
+        "knowledge_gap_id": {"type": ["string", "null"]},
+        "signal_ids": {"type": "array", "items": {"type": "string"}},
+        "fingerprint": {"type": "object"},
+        "scores": {
+          "type": "object",
+          "required": ["trend", "blog_value", "base_priority", "boosts", "penalties", "final_priority", "band", "special_queue"],
+          "properties": {
+            "trend": {"$ref": "#/$defs/trendScore"},
+            "blog_value": {"$ref": "#/$defs/blogValueScore"},
+            "base_priority": {"type": "number", "minimum": 0, "maximum": 100},
+            "boosts": {"type": "array", "items": {"$ref": "#/$defs/adjustment"}},
+            "penalties": {"type": "array", "items": {"$ref": "#/$defs/adjustment"}},
+            "final_priority": {"type": "integer", "minimum": 0, "maximum": 100},
+            "band": {"enum": ["P0_IMMEDIATE", "P1_HIGH_PRIORITY", "P2_RECOMMENDED", "P3_BACKLOG", "REJECT_ARCHIVE"]},
+            "special_queue": {"type": ["string", "null"], "enum": ["URGENT_REVIEW", "EVERGREEN_PRIORITY", null]}
+          },
+          "additionalProperties": false
+        },
+        "duplicate_status": {"enum": ["NEW", "UPDATE_EXISTING", "MERGE", "RELATED", "CANNIBALIZATION_RISK", "REJECT_DUPLICATE"]},
+        "overlap_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "related_topic_ids": {"type": "array", "items": {"type": "string"}},
+        "pillar_topic_id": {"type": ["string", "null"]},
+        "lineage": {"type": "object"},
+        "publish_window": {"type": ["string", "null"]},
+        "status": {"enum": ["DISCOVERED", "SCORED", "REVIEW", "APPROVED", "HANDED_TO_RESEARCHER", "MERGED", "REJECTED", "EXPIRED"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}
