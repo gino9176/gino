@@ -1,0 +1,36 @@
+industry: Bicycle manufacturing
+product: Aluminum e-bike frames
+target_market:
+  primary:
+    - Netherlands
+    - Germany
+  secondary:
+    - Belgium
+    - Poland
+target_customer:
+  - E-bike brands
+  - Bicycle assemblers
+customer_roles:
+  - Purchasing Manager
+  - Product Manager
+business_model: B2B
+website: https://example.com
+competitors:
+  - name: Example Competitor
+    url: https://competitor.example
+    market: Europe
+languages:
+  - en
+  - nl
+  - de
+run_mode: weekly
+scan_depth: focused
+timezone: Asia/Shanghai
+feishu_destination: null
+seo_provider: null
+existing_content: []
+topic_memory: []
+knowledge_map: []
+extra_constraints:
+  - Stop at Topic Score
+  - Do not invent SEO metrics
