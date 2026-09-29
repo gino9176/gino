@@ -1,0 +1,22 @@
+version: 1
+default_research_mode: "standard"
+default_output_language: "en"
+search:
+  multilingual: true
+  primary_source_first: true
+  max_automatic_escalations: 1
+  preserve_original_terms: true
+outputs:
+  json_filename: "research_pack.json"
+  markdown_filename: "research_report.md"
+quality_gates:
+  critical_question_coverage: 1.0
+  important_question_coverage: 0.8
+  block_on_critical_gap: true
+  block_on_critical_conflict: true
+  block_on_unverified_core_news: true
+  block_on_schema_failure: true
+audit:
+  store_full_query_log: false
+  store_rejected_sources: true
+  preserve_previous_versions: true

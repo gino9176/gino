@@ -1,0 +1,327 @@
+{
+  "metadata": {
+    "run_id": "RUN-EXAMPLE-NEWS",
+    "research_version": "1.0",
+    "started_at": "2026-09-29T02:00:00Z",
+    "completed_at": "2026-09-29T02:35:00Z",
+    "requested_mode": "standard",
+    "executed_mode": "standard",
+    "escalation_reason": null,
+    "output_language": "en",
+    "partial": false,
+    "assumptions": [],
+    "is_synthetic_example": true
+  },
+  "topic": {
+    "topic_id": "T-20260929-002",
+    "topic": "What a proposed regional product rule could mean for importers",
+    "primary_keyword": "proposed product rule importers",
+    "topic_type": "news",
+    "target_markets": [
+      "Example Market"
+    ],
+    "output_language": "en",
+    "target_customer": "B2B importers",
+    "search_intent": "UNDERSTAND",
+    "source_trigger": {
+      "event_id": "EV-EXAMPLE-001",
+      "knowledge_gap_id": null,
+      "signal_ids": [],
+      "primary_source_url": "https://example.com/official"
+    },
+    "topic_score": 82,
+    "score_reason": [
+      "Synthetic example for schema and workflow demonstration"
+    ],
+    "research_priority": "normal",
+    "research_mode": "standard",
+    "upstream": {
+      "synthetic": true
+    }
+  },
+  "research_status": "NOT_READY",
+  "research_summary": [
+    "Synthetic example: the available primary notice describes a proposal, not an adopted or effective rule.",
+    "The original topic premise must be revised upstream before writing."
+  ],
+  "topic_issue": {
+    "issue_type": "premise_error",
+    "original_premise": "The region banned the product.",
+    "verified_reality": "The synthetic authority opened a proposal for consultation.",
+    "evidence_ids": [
+      "E01"
+    ],
+    "recommended_revision": "What the proposed regional product rule could mean for importers",
+    "impact": "Calling a proposal a ban would materially overstate its legal status."
+  },
+  "research_questions": [
+    {
+      "rq_id": "RQ01",
+      "question": "What is the official legal status?",
+      "priority": "critical",
+      "status": "covered",
+      "confidence": "high",
+      "claim_ids": [
+        "C01"
+      ],
+      "gap_impact": null
+    },
+    {
+      "rq_id": "RQ02",
+      "question": "When would the rule take effect?",
+      "priority": "critical",
+      "status": "gap",
+      "confidence": "unverified",
+      "claim_ids": [
+        "C02"
+      ],
+      "gap_impact": "No effective date exists at proposal stage."
+    }
+  ],
+  "definitions": [
+    {
+      "definition_id": "D01",
+      "term": "proposal",
+      "normalized_definition": "A consultation-stage text that is not adopted or effective.",
+      "scope": "Synthetic example only",
+      "source_ids": [
+        "S01"
+      ],
+      "match_status": "exact"
+    }
+  ],
+  "verified_claims": [
+    {
+      "claim_id": "C01",
+      "statement": "The synthetic authority opened a consultation on a proposed rule.",
+      "claim_type": "fact",
+      "confidence": "high",
+      "writer_usage": "direct",
+      "supports_rq": [
+        "RQ01"
+      ],
+      "evidence_ids": [
+        "E01"
+      ],
+      "based_on_claim_ids": [],
+      "corroboration": "none",
+      "caution": "Synthetic demonstration only.",
+      "status": "active"
+    },
+    {
+      "claim_id": "C02",
+      "statement": "The proposal has a confirmed effective date.",
+      "claim_type": "fact",
+      "confidence": "unverified",
+      "writer_usage": "prohibited",
+      "supports_rq": [
+        "RQ02"
+      ],
+      "evidence_ids": [],
+      "based_on_claim_ids": [],
+      "corroboration": "none",
+      "caution": "No effective date is supported.",
+      "status": "rejected"
+    }
+  ],
+  "data_points": [],
+  "evidence_units": [
+    {
+      "evidence_id": "E01",
+      "claim_id": "C01",
+      "evidence_summary": "Synthetic official notice labels the action as a consultation proposal.",
+      "exact_quote": null,
+      "source_id": "S01",
+      "source_type": "regulatory_notice",
+      "source_tier": 1,
+      "published_at": "2026-09-28T00:00:00Z",
+      "event_date": "2026-09-28",
+      "retrieved_at": "2026-09-29T02:10:00Z",
+      "geography": [
+        "Example Market"
+      ],
+      "temporal_status": "current",
+      "definition_match": "exact",
+      "confidence": "high",
+      "corroboration": "none",
+      "supports_rq": [
+        "RQ01"
+      ],
+      "limitations": [
+        "Synthetic example; not real evidence."
+      ]
+    }
+  ],
+  "contradictions": [],
+  "voice_of_market": {
+    "warning": "Market Voice describes repeated participant language; it is not verified factual evidence.",
+    "clusters": []
+  },
+  "competitor_analysis": {
+    "serp_queries": [
+      "synthetic proposed rule"
+    ],
+    "pages_scanned": 1,
+    "pages_deep_reviewed": 1,
+    "common_topics": [
+      "Impact speculation"
+    ],
+    "omitted_questions": [
+      "Proposal versus adopted rule"
+    ],
+    "weak_evidence_patterns": [
+      "Headline overstates legal status"
+    ]
+  },
+  "content_gaps": [
+    {
+      "gap_id": "CG01",
+      "gap_type": "definition",
+      "description": "Coverage fails to distinguish proposal from effective rule.",
+      "evidence": "Synthetic comparison.",
+      "opportunity": "Clarify legal status and uncertainty."
+    }
+  ],
+  "evidence_gaps": [
+    {
+      "gap_id": "G01",
+      "rq_id": "RQ02",
+      "priority": "critical",
+      "gap_type": "no_reliable_source",
+      "search_attempted": true,
+      "impact": "An effective date cannot be stated.",
+      "status": "open",
+      "recommended_action": "Revise the topic and recheck after official adoption."
+    }
+  ],
+  "source_library": [
+    {
+      "source_id": "S01",
+      "title": "Synthetic Consultation Notice",
+      "publisher": "Example Authority",
+      "url": "https://example.com/official",
+      "source_type": "regulatory_notice",
+      "source_tier": 1,
+      "source_score": 94,
+      "published_at": "2026-09-28T00:00:00Z",
+      "retrieved_at": "2026-09-29T02:10:00Z",
+      "event_date": "2026-09-28",
+      "language": "en",
+      "geography": [
+        "Example Market"
+      ],
+      "original_source_id": null,
+      "independence_group": "IG01",
+      "status": "used",
+      "rejection_reason": null,
+      "supports_rq": [
+        "RQ01"
+      ]
+    }
+  ],
+  "quality": {
+    "coverage_score": 50,
+    "critical_coverage": 0.5,
+    "important_coverage": 1,
+    "optional_coverage": 1,
+    "research_confidence": 58,
+    "research_confidence_label": "weak",
+    "confidence_components": {
+      "coverage": 50,
+      "claims": 55,
+      "sources": 94,
+      "primary_ratio": 100,
+      "contradictions": 100,
+      "freshness": 100
+    },
+    "primary_source_ratio": 1,
+    "unresolved_critical_conflicts": 0,
+    "critical_gaps": 1,
+    "writer_ready": false,
+    "schema_valid": true,
+    "gate_failures": [
+      "Critical RQ02 is a gap.",
+      "Material topic premise error."
+    ]
+  },
+  "seo_handoff": {
+    "message_type": "SEO_HANDOFF",
+    "topic_id": "T-20260929-002",
+    "verified_terminology": [
+      "proposal",
+      "consultation"
+    ],
+    "definition_ids": [
+      "D01"
+    ],
+    "major_subtopics": [
+      "official status",
+      "consultation process"
+    ],
+    "content_gaps": [
+      "proposal versus adopted rule"
+    ],
+    "competitor_coverage": [
+      "impact speculation"
+    ],
+    "buyer_questions": [
+      "When could requirements become effective?"
+    ],
+    "market_voice_clusters": [],
+    "strong_data_point_ids": [],
+    "evidence_limitations": [
+      "No effective date is supported.",
+      "Topic premise requires upstream revision."
+    ]
+  },
+  "writer_handoff": {
+    "message_type": "WRITER_HANDOFF",
+    "topic_id": "T-20260929-002",
+    "core_claim_ids": [
+      "C01"
+    ],
+    "strongest_data_point_ids": [],
+    "cautious_claim_ids": [],
+    "prohibited_claim_ids": [
+      "C02"
+    ],
+    "must_cite_source_ids": [
+      "S01"
+    ],
+    "definition_ids": [
+      "D01"
+    ],
+    "counterargument_claim_ids": [],
+    "buyer_pain_points": [
+      "Avoid planning around a rule that is not adopted."
+    ],
+    "evidence_gap_ids": [
+      "G01"
+    ],
+    "limitations": [
+      "Writer handoff is blocked because writer_ready is false."
+    ]
+  },
+  "audit_trail": {
+    "research_dates": [
+      "2026-09-29"
+    ],
+    "search_iterations": 2,
+    "sources_considered": 2,
+    "sources_used": [
+      "S01"
+    ],
+    "sources_rejected": [
+      {
+        "source_id": "S02",
+        "reason": "Headline was derivative and overstated the primary notice."
+      }
+    ],
+    "reused_object_ids": [],
+    "revalidated_object_ids": [],
+    "warnings": [
+      "This is a synthetic example and not real research."
+    ],
+    "schema_errors": []
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/topic-researcher-v1/handoff.schema.json",
+  "title": "Topic Researcher V1 Handoff",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_type",
+        "topic_id",
+        "verified_terminology",
+        "definition_ids",
+        "major_subtopics",
+        "content_gaps",
+        "competitor_coverage",
+        "buyer_questions",
+        "market_voice_clusters",
+        "strong_data_point_ids",
+        "evidence_limitations"
+      ],
+      "properties": {
+        "message_type": {
+          "const": "SEO_HANDOFF"
+        },
+        "topic_id": {
+          "type": "string"
+        },
+        "verified_terminology": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "definition_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "major_subtopics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "content_gaps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "competitor_coverage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "buyer_questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "market_voice_clusters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strong_data_point_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_type",
+        "topic_id",
+        "core_claim_ids",
+        "strongest_data_point_ids",
+        "cautious_claim_ids",
+        "prohibited_claim_ids",
+        "must_cite_source_ids",
+        "definition_ids",
+        "counterargument_claim_ids",
+        "buyer_pain_points",
+        "evidence_gap_ids",
+        "limitations"
+      ],
+      "properties": {
+        "message_type": {
+          "const": "WRITER_HANDOFF"
+        },
+        "topic_id": {
+          "type": "string"
+        },
+        "core_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strongest_data_point_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cautious_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prohibited_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "must_cite_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "definition_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "counterargument_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "buyer_pain_points": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_gap_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_type",
+        "request_id",
+        "feedback_type",
+        "from",
+        "to",
+        "topic_id",
+        "question",
+        "reason",
+        "priority"
+      ],
+      "properties": {
+        "message_type": {
+          "const": "FEEDBACK_REQUEST"
+        },
+        "request_id": {
+          "type": "string"
+        },
+        "feedback_type": {
+          "enum": [
+            "RESEARCH_REQUEST",
+            "TOPIC_REVISION_REQUEST",
+            "SEO_REVISION_REQUEST",
+            "FACT_CHECK_REQUEST"
+          ]
+        },
+        "from": {
+          "enum": [
+            "topic_skill",
+            "seo_planner",
+            "writer",
+            "editor",
+            "human"
+          ]
+        },
+        "to": {
+          "enum": [
+            "topic_skill",
+            "researcher",
+            "seo_planner",
+            "writer",
+            "editor",
+            "human"
+          ]
+        },
+        "topic_id": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "priority": {
+          "enum": [
+            "critical",
+            "important",
+            "optional"
+          ]
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

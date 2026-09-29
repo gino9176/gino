@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/topic-researcher-v1/evidence-unit.schema.json",
+  "title": "Topic Researcher V1 Evidence Unit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_id",
+    "claim_id",
+    "evidence_summary",
+    "source_id",
+    "source_type",
+    "source_tier",
+    "retrieved_at",
+    "geography",
+    "temporal_status",
+    "definition_match",
+    "confidence",
+    "supports_rq"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^E[0-9]+$"
+    },
+    "claim_id": {
+      "type": "string",
+      "pattern": "^C[0-9]+$"
+    },
+    "evidence_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exact_quote": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^S[0-9]+$"
+    },
+    "source_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "event_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "geography": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "temporal_status": {
+      "enum": [
+        "current",
+        "historical",
+        "background",
+        "superseded"
+      ]
+    },
+    "definition_match": {
+      "enum": [
+        "exact",
+        "minor_difference",
+        "material_difference",
+        "unknown",
+        "conflicting"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unverified"
+      ]
+    },
+    "corroboration": {
+      "enum": [
+        "strong",
+        "moderate",
+        "weak",
+        "none",
+        "conflicting"
+      ]
+    },
+    "supports_rq": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^RQ[0-9]+$"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

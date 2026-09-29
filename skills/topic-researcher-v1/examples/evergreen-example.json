@@ -1,0 +1,268 @@
+{
+  "metadata": {
+    "run_id": "RUN-EXAMPLE-EVERGREEN",
+    "research_version": "1.0",
+    "started_at": "2026-09-29T01:00:00Z",
+    "completed_at": "2026-09-29T01:30:00Z",
+    "requested_mode": "standard",
+    "executed_mode": "standard",
+    "escalation_reason": null,
+    "output_language": "en",
+    "partial": false,
+    "assumptions": [],
+    "is_synthetic_example": true
+  },
+  "topic": {
+    "topic_id": "T-20260929-001",
+    "topic": "How buyers can verify an industrial component specification",
+    "primary_keyword": "verify industrial component specification",
+    "topic_type": "evergreen",
+    "target_markets": [
+      "Example Market"
+    ],
+    "output_language": "en",
+    "target_customer": "B2B importers",
+    "search_intent": "VERIFY",
+    "source_trigger": {
+      "event_id": null,
+      "knowledge_gap_id": "KG-EXAMPLE-001",
+      "signal_ids": [],
+      "primary_source_url": "https://example.com/official"
+    },
+    "topic_score": 82,
+    "score_reason": [
+      "Synthetic example for schema and workflow demonstration"
+    ],
+    "research_priority": "normal",
+    "research_mode": "standard",
+    "upstream": {
+      "synthetic": true
+    }
+  },
+  "research_status": "READY",
+  "research_summary": [
+    "Synthetic example: a specification should be checked against the current original document and the exact product scope.",
+    "All URLs and facts in this file are placeholders and must never be reused as real evidence."
+  ],
+  "topic_issue": null,
+  "research_questions": [
+    {
+      "rq_id": "RQ01",
+      "question": "What source should define the specification?",
+      "priority": "critical",
+      "status": "covered",
+      "confidence": "high",
+      "claim_ids": [
+        "C01"
+      ],
+      "gap_impact": null
+    }
+  ],
+  "definitions": [
+    {
+      "definition_id": "D01",
+      "term": "current specification",
+      "normalized_definition": "The latest applicable original specification for the exact product scope.",
+      "scope": "Synthetic example only",
+      "source_ids": [
+        "S01"
+      ],
+      "match_status": "exact"
+    }
+  ],
+  "verified_claims": [
+    {
+      "claim_id": "C01",
+      "statement": "In this synthetic example, verification uses the current original specification for the exact product scope.",
+      "claim_type": "fact",
+      "confidence": "high",
+      "writer_usage": "direct",
+      "supports_rq": [
+        "RQ01"
+      ],
+      "evidence_ids": [
+        "E01"
+      ],
+      "based_on_claim_ids": [],
+      "corroboration": "none",
+      "caution": "Synthetic demonstration only.",
+      "status": "active"
+    }
+  ],
+  "data_points": [],
+  "evidence_units": [
+    {
+      "evidence_id": "E01",
+      "claim_id": "C01",
+      "evidence_summary": "Synthetic official guidance identifies the original specification as the verification basis.",
+      "exact_quote": null,
+      "source_id": "S01",
+      "source_type": "official_guidance",
+      "source_tier": 1,
+      "published_at": "2026-09-01T00:00:00Z",
+      "event_date": null,
+      "retrieved_at": "2026-09-29T01:10:00Z",
+      "geography": [
+        "Example Market"
+      ],
+      "temporal_status": "current",
+      "definition_match": "exact",
+      "confidence": "high",
+      "corroboration": "none",
+      "supports_rq": [
+        "RQ01"
+      ],
+      "limitations": [
+        "Synthetic example; not real evidence."
+      ]
+    }
+  ],
+  "contradictions": [],
+  "voice_of_market": {
+    "warning": "Market Voice describes repeated participant language; it is not verified factual evidence.",
+    "clusters": []
+  },
+  "competitor_analysis": {
+    "serp_queries": [
+      "synthetic example query"
+    ],
+    "pages_scanned": 1,
+    "pages_deep_reviewed": 1,
+    "common_topics": [
+      "Basic checklist"
+    ],
+    "omitted_questions": [
+      "How to detect a superseded document"
+    ],
+    "weak_evidence_patterns": [
+      "No original-source link"
+    ]
+  },
+  "content_gaps": [
+    {
+      "gap_id": "CG01",
+      "gap_type": "missing_question",
+      "description": "Competitor example omits superseded-document checks.",
+      "evidence": "Synthetic page review.",
+      "opportunity": "Explain version and scope verification without creating an outline."
+    }
+  ],
+  "evidence_gaps": [],
+  "source_library": [
+    {
+      "source_id": "S01",
+      "title": "Synthetic Specification Guidance",
+      "publisher": "Example Authority",
+      "url": "https://example.com/official",
+      "source_type": "official_guidance",
+      "source_tier": 1,
+      "source_score": 90,
+      "published_at": "2026-09-01T00:00:00Z",
+      "retrieved_at": "2026-09-29T01:10:00Z",
+      "event_date": null,
+      "language": "en",
+      "geography": [
+        "Example Market"
+      ],
+      "original_source_id": null,
+      "independence_group": "IG01",
+      "status": "used",
+      "rejection_reason": null,
+      "supports_rq": [
+        "RQ01"
+      ]
+    }
+  ],
+  "quality": {
+    "coverage_score": 100,
+    "critical_coverage": 1,
+    "important_coverage": 1,
+    "optional_coverage": 1,
+    "research_confidence": 88,
+    "research_confidence_label": "high",
+    "confidence_components": {
+      "coverage": 100,
+      "claims": 90,
+      "sources": 90,
+      "primary_ratio": 100,
+      "contradictions": 100,
+      "freshness": 100
+    },
+    "primary_source_ratio": 1,
+    "unresolved_critical_conflicts": 0,
+    "critical_gaps": 0,
+    "writer_ready": true,
+    "schema_valid": true,
+    "gate_failures": []
+  },
+  "seo_handoff": {
+    "message_type": "SEO_HANDOFF",
+    "topic_id": "T-20260929-001",
+    "verified_terminology": [
+      "current specification"
+    ],
+    "definition_ids": [
+      "D01"
+    ],
+    "major_subtopics": [
+      "document authority",
+      "scope matching",
+      "version status"
+    ],
+    "content_gaps": [
+      "superseded-document checks"
+    ],
+    "competitor_coverage": [
+      "basic checklist"
+    ],
+    "buyer_questions": [
+      "How do I know the document is current?"
+    ],
+    "market_voice_clusters": [],
+    "strong_data_point_ids": [],
+    "evidence_limitations": [
+      "Synthetic example only."
+    ]
+  },
+  "writer_handoff": {
+    "message_type": "WRITER_HANDOFF",
+    "topic_id": "T-20260929-001",
+    "core_claim_ids": [
+      "C01"
+    ],
+    "strongest_data_point_ids": [],
+    "cautious_claim_ids": [],
+    "prohibited_claim_ids": [],
+    "must_cite_source_ids": [
+      "S01"
+    ],
+    "definition_ids": [
+      "D01"
+    ],
+    "counterargument_claim_ids": [],
+    "buyer_pain_points": [
+      "Avoid using an obsolete specification."
+    ],
+    "evidence_gap_ids": [],
+    "limitations": [
+      "Synthetic example only."
+    ]
+  },
+  "audit_trail": {
+    "research_dates": [
+      "2026-09-29"
+    ],
+    "search_iterations": 1,
+    "sources_considered": 1,
+    "sources_used": [
+      "S01"
+    ],
+    "sources_rejected": [],
+    "reused_object_ids": [],
+    "revalidated_object_ids": [],
+    "warnings": [
+      "This is a synthetic example and not real research."
+    ],
+    "schema_errors": []
+  }
+}

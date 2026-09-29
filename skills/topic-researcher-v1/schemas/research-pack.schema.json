@@ -1,0 +1,1028 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/topic-researcher-v1/research-pack.schema.json",
+  "title": "Topic Researcher V1 Research Pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metadata",
+    "topic",
+    "research_status",
+    "research_summary",
+    "topic_issue",
+    "research_questions",
+    "definitions",
+    "verified_claims",
+    "data_points",
+    "evidence_units",
+    "contradictions",
+    "voice_of_market",
+    "competitor_analysis",
+    "content_gaps",
+    "evidence_gaps",
+    "source_library",
+    "quality",
+    "seo_handoff",
+    "writer_handoff",
+    "audit_trail"
+  ],
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "topic": {
+      "$ref": "topic-card.schema.json"
+    },
+    "research_status": {
+      "enum": [
+        "READY",
+        "READY_WITH_LIMITATIONS",
+        "NOT_READY"
+      ]
+    },
+    "research_summary": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "topic_issue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/topicIssue"
+        }
+      ]
+    },
+    "research_questions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/researchQuestion"
+      }
+    },
+    "definitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/definition"
+      }
+    },
+    "verified_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "data_points": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dataPoint"
+      }
+    },
+    "evidence_units": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence-unit.schema.json"
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contradiction"
+      }
+    },
+    "voice_of_market": {
+      "$ref": "#/$defs/voiceOfMarket"
+    },
+    "competitor_analysis": {
+      "$ref": "#/$defs/competitorAnalysis"
+    },
+    "content_gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contentGap"
+      }
+    },
+    "evidence_gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidenceGap"
+      }
+    },
+    "source_library": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "quality": {
+      "$ref": "#/$defs/quality"
+    },
+    "seo_handoff": {
+      "$ref": "handoff.schema.json#/oneOf/0"
+    },
+    "writer_handoff": {
+      "$ref": "handoff.schema.json#/oneOf/1"
+    },
+    "audit_trail": {
+      "$ref": "#/$defs/auditTrail"
+    }
+  },
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "research_version",
+        "started_at",
+        "completed_at",
+        "requested_mode",
+        "executed_mode",
+        "output_language",
+        "partial",
+        "assumptions",
+        "is_synthetic_example"
+      ],
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "research_version": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requested_mode": {
+          "enum": [
+            "quick",
+            "standard",
+            "deep"
+          ]
+        },
+        "executed_mode": {
+          "enum": [
+            "quick",
+            "standard",
+            "deep"
+          ]
+        },
+        "escalation_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output_language": {
+          "type": "string"
+        },
+        "partial": {
+          "type": "boolean"
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_synthetic_example": {
+          "type": "boolean"
+        }
+      }
+    },
+    "topicIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "issue_type",
+        "original_premise",
+        "verified_reality",
+        "evidence_ids",
+        "recommended_revision",
+        "impact"
+      ],
+      "properties": {
+        "issue_type": {
+          "enum": [
+            "premise_error",
+            "too_broad",
+            "ambiguous",
+            "outdated",
+            "unsupported"
+          ]
+        },
+        "original_premise": {
+          "type": "string"
+        },
+        "verified_reality": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommended_revision": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string"
+        }
+      }
+    },
+    "researchQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rq_id",
+        "question",
+        "priority",
+        "status",
+        "confidence",
+        "claim_ids",
+        "gap_impact"
+      ],
+      "properties": {
+        "rq_id": {
+          "type": "string",
+          "pattern": "^RQ[0-9]+$"
+        },
+        "question": {
+          "type": "string"
+        },
+        "priority": {
+          "enum": [
+            "critical",
+            "important",
+            "optional"
+          ]
+        },
+        "status": {
+          "enum": [
+            "covered",
+            "partial",
+            "gap",
+            "not_applicable"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unverified"
+          ]
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gap_impact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_id",
+        "term",
+        "normalized_definition",
+        "scope",
+        "source_ids",
+        "match_status"
+      ],
+      "properties": {
+        "definition_id": {
+          "type": "string",
+          "pattern": "^D[0-9]+$"
+        },
+        "term": {
+          "type": "string"
+        },
+        "normalized_definition": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "match_status": {
+          "enum": [
+            "exact",
+            "minor_difference",
+            "material_difference",
+            "unknown",
+            "conflicting"
+          ]
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "statement",
+        "claim_type",
+        "confidence",
+        "writer_usage",
+        "supports_rq",
+        "evidence_ids",
+        "based_on_claim_ids",
+        "corroboration",
+        "caution",
+        "status"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^C[0-9]+$"
+        },
+        "statement": {
+          "type": "string"
+        },
+        "claim_type": {
+          "enum": [
+            "fact",
+            "inference",
+            "opinion",
+            "market_voice"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unverified"
+          ]
+        },
+        "writer_usage": {
+          "enum": [
+            "direct",
+            "qualified",
+            "background_only",
+            "prohibited"
+          ]
+        },
+        "supports_rq": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "based_on_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "corroboration": {
+          "enum": [
+            "strong",
+            "moderate",
+            "weak",
+            "none",
+            "conflicting"
+          ]
+        },
+        "caution": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "active",
+            "superseded",
+            "rejected"
+          ]
+        }
+      }
+    },
+    "dataPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "data_point_id",
+        "metric",
+        "value",
+        "unit",
+        "period",
+        "geography",
+        "population",
+        "definition",
+        "source_id",
+        "confidence"
+      ],
+      "properties": {
+        "data_point_id": {
+          "type": "string",
+          "pattern": "^DP[0-9]+$"
+        },
+        "metric": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string"
+        },
+        "geography": {
+          "type": "string"
+        },
+        "population": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "definition": {
+          "type": "string"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unverified"
+          ]
+        }
+      }
+    },
+    "contradiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contradiction_id",
+        "issue",
+        "claim_ids",
+        "source_ids",
+        "difference",
+        "likely_reason",
+        "resolved",
+        "critical",
+        "resolution",
+        "writer_guidance"
+      ],
+      "properties": {
+        "contradiction_id": {
+          "type": "string",
+          "pattern": "^X[0-9]+$"
+        },
+        "issue": {
+          "type": "string"
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "difference": {
+          "type": "string"
+        },
+        "likely_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolved": {
+          "type": "boolean"
+        },
+        "critical": {
+          "type": "boolean"
+        },
+        "resolution": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "writer_guidance": {
+          "type": "string"
+        }
+      }
+    },
+    "voiceOfMarket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "warning",
+        "clusters"
+      ],
+      "properties": {
+        "warning": {
+          "const": "Market Voice describes repeated participant language; it is not verified factual evidence."
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "cluster_id",
+              "theme",
+              "normalized_language",
+              "frequency_signal",
+              "source_ids",
+              "buyer_implication"
+            ],
+            "properties": {
+              "cluster_id": {
+                "type": "string"
+              },
+              "theme": {
+                "type": "string"
+              },
+              "normalized_language": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "frequency_signal": {
+                "enum": [
+                  "isolated",
+                  "repeated",
+                  "strongly_repeated"
+                ]
+              },
+              "source_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "buyer_implication": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "competitorAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "serp_queries",
+        "pages_scanned",
+        "pages_deep_reviewed",
+        "common_topics",
+        "omitted_questions",
+        "weak_evidence_patterns"
+      ],
+      "properties": {
+        "serp_queries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pages_scanned": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pages_deep_reviewed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "common_topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "omitted_questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "weak_evidence_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "contentGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gap_id",
+        "gap_type",
+        "description",
+        "evidence",
+        "opportunity"
+      ],
+      "properties": {
+        "gap_id": {
+          "type": "string"
+        },
+        "gap_type": {
+          "enum": [
+            "missing_question",
+            "outdated_information",
+            "weak_support",
+            "buyer_language",
+            "counterargument",
+            "definition",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "opportunity": {
+          "type": "string"
+        }
+      }
+    },
+    "evidenceGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gap_id",
+        "rq_id",
+        "priority",
+        "gap_type",
+        "search_attempted",
+        "impact",
+        "status",
+        "recommended_action"
+      ],
+      "properties": {
+        "gap_id": {
+          "type": "string",
+          "pattern": "^G[0-9]+$"
+        },
+        "rq_id": {
+          "type": "string"
+        },
+        "priority": {
+          "enum": [
+            "critical",
+            "important",
+            "optional"
+          ]
+        },
+        "gap_type": {
+          "enum": [
+            "no_reliable_source",
+            "primary_source_unavailable",
+            "definition_unresolved",
+            "geography_mismatch",
+            "freshness_failure",
+            "methodology_unclear",
+            "conflict_unresolved",
+            "access_failure",
+            "other"
+          ]
+        },
+        "search_attempted": {
+          "type": "boolean"
+        },
+        "impact": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "open",
+            "resolved",
+            "accepted_limitation"
+          ]
+        },
+        "recommended_action": {
+          "type": "string"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "title",
+        "publisher",
+        "url",
+        "source_type",
+        "source_tier",
+        "source_score",
+        "published_at",
+        "retrieved_at",
+        "event_date",
+        "language",
+        "geography",
+        "original_source_id",
+        "independence_group",
+        "status",
+        "rejection_reason",
+        "supports_rq"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^S[0-9]+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "source_tier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "source_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "language": {
+          "type": "string"
+        },
+        "geography": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "original_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "independence_group": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "used",
+            "context_only",
+            "rejected",
+            "unavailable"
+          ]
+        },
+        "rejection_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supports_rq": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage_score",
+        "critical_coverage",
+        "important_coverage",
+        "optional_coverage",
+        "research_confidence",
+        "research_confidence_label",
+        "confidence_components",
+        "primary_source_ratio",
+        "unresolved_critical_conflicts",
+        "critical_gaps",
+        "writer_ready",
+        "schema_valid",
+        "gate_failures"
+      ],
+      "properties": {
+        "coverage_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "critical_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "important_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "optional_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "research_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "research_confidence_label": {
+          "enum": [
+            "very_high",
+            "high",
+            "moderate",
+            "weak",
+            "insufficient"
+          ]
+        },
+        "confidence_components": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        },
+        "primary_source_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "unresolved_critical_conflicts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "critical_gaps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "writer_ready": {
+          "type": "boolean"
+        },
+        "schema_valid": {
+          "type": "boolean"
+        },
+        "gate_failures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "auditTrail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "research_dates",
+        "search_iterations",
+        "sources_considered",
+        "sources_used",
+        "sources_rejected",
+        "reused_object_ids",
+        "revalidated_object_ids",
+        "warnings",
+        "schema_errors"
+      ],
+      "properties": {
+        "research_dates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "search_iterations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sources_considered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sources_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources_rejected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_id",
+              "reason"
+            ],
+            "properties": {
+              "source_id": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "reused_object_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "revalidated_object_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema_errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

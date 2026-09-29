@@ -1,0 +1,4 @@
+interface:
+  display_name: "Topic Researcher V1"
+  short_description: "Evidence-first research packs with traceable claims"
+  default_prompt: "Use $topic-researcher-v1 to turn this approved Topic Card into a validated Research Pack and downstream handoffs."
