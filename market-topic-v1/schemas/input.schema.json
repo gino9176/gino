@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/market-topic-v1/input.schema.json",
+  "title": "Market Topic V1 Input",
+  "type": "object",
+  "required": ["industry", "product"],
+  "properties": {
+    "industry": {"type": "string", "minLength": 1},
+    "product": {"type": "string", "minLength": 1},
+    "target_market": {
+      "type": "object",
+      "properties": {
+        "primary": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "secondary": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "required": ["primary", "secondary"],
+      "additionalProperties": false
+    },
+    "target_customer": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "customer_roles": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "business_model": {
+      "type": "string",
+      "enum": ["B2B", "B2C", "B2B2C", "OTHER"],
+      "default": "B2B"
+    },
+    "website": {"type": ["string", "null"], "format": "uri"},
+    "competitors": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"type": "string", "minLength": 1},
+          {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "url": {"type": ["string", "null"], "format": "uri"},
+              "market": {"type": ["string", "null"]}
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "run_mode": {
+      "type": "string",
+      "enum": ["daily", "weekly", "monthly"],
+      "default": "daily"
+    },
+    "scan_depth": {
+      "type": "string",
+      "enum": ["focused", "deep"],
+      "default": "focused"
+    },
+    "timezone": {"type": "string", "default": "UTC"},
+    "feishu_destination": {
+      "type": ["object", "null"],
+      "properties": {
+        "app_token": {"type": "string"},
+        "signals_table": {"type": "string"},
+        "events_table": {"type": "string"},
+        "topics_table": {"type": "string"},
+        "knowledge_map_table": {"type": "string"}
+      },
+      "required": ["app_token"],
+      "additionalProperties": false
+    },
+    "seo_provider": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": {"type": "string"},
+        "market": {"type": ["string", "null"]},
+        "language": {"type": ["string", "null"]}
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "existing_content": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "topic_memory": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "knowledge_map": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "extra_constraints": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "additionalProperties": false
+}
