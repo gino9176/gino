@@ -1,0 +1,14 @@
+interface:
+  display_name: Market Topic V1
+  short_description: Discover and score B2B trend and evergreen topics
+  default_prompt: Use $market-topic-v1 to discover, deduplicate, score, and rank industry
+    blog topics.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
